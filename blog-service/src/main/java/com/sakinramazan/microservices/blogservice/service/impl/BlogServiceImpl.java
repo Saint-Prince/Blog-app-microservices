@@ -6,10 +6,14 @@ import com.sakinramazan.microservices.blogservice.entity.Blog;
 import com.sakinramazan.microservices.blogservice.entity.Post;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+// TODO -- remove Service annotation ?
+@Service
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
