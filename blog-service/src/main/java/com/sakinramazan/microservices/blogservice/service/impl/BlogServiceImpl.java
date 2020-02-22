@@ -1,5 +1,6 @@
 package com.sakinramazan.microservices.blogservice.service.impl;
 
+import com.sakinramazan.microservices.blogservice.client.PostServiceClient;
 import com.sakinramazan.microservices.blogservice.dao.BlogRepository;
 import com.sakinramazan.microservices.blogservice.entity.Blog;
 import com.sakinramazan.microservices.blogservice.entity.Post;
@@ -13,6 +14,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @Autowired
+    private PostServiceClient postServiceClient;
 
     @Override
     public List<Blog> getAllBlogs() {
@@ -54,9 +58,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Post addNewPost(Integer id) {
+    public Post addNewPost(Post post, Integer id) {
         Blog blog = getBlog(id);
+        Post currPost = postServiceClient.savePost(post);
 
-        return null;
+        // TODO -- refactorable block
+        List<Post> posts = blog.getPosts();
+        posts.add(currPost);
+        blog.setPosts(posts);
+        blogRepository.save(blog);
+
+        return currPost;
     }
 }

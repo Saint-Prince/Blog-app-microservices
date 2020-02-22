@@ -20,6 +20,6 @@ public interface BlogService {
 
     List<Post> getAllPostOf(Integer id);
 
-    Post addNewPost(Integer id);
+    Post addNewPost(Post post, Integer id);
 
 }
