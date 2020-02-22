@@ -2,6 +2,7 @@ package com.sakinramazan.microservices.blogservice.service.impl;
 
 import com.sakinramazan.microservices.blogservice.dao.BlogRepository;
 import com.sakinramazan.microservices.blogservice.entity.Blog;
+import com.sakinramazan.microservices.blogservice.entity.Post;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,5 +45,11 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = getBlog(id);
         blogRepository.delete(blog);
         return true;
+    }
+
+    @Override
+    public List<Post> getAllPostOf(Integer id) {
+        Blog blog = getBlog(id);
+        return blog.getPosts();
     }
 }
