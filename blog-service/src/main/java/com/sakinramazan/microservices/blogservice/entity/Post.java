@@ -25,8 +25,4 @@ public class Post implements Serializable {
     @JoinColumn(name = "blog_id", referencedColumnName = "id")
     private Blog blog;
 
-
-
-
-
 }

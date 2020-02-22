@@ -25,5 +25,4 @@ public class Blog implements Serializable {
     @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)
     private List<Post> posts;
 
-
 }

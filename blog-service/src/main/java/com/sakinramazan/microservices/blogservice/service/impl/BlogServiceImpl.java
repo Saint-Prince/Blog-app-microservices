@@ -52,4 +52,11 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = getBlog(id);
         return blog.getPosts();
     }
+
+    @Override
+    public Post addNewPost(Integer id) {
+        Blog blog = getBlog(id);
+
+        return null;
+    }
 }
