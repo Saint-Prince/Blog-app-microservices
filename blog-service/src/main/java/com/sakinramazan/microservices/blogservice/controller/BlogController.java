@@ -1,6 +1,7 @@
 package com.sakinramazan.microservices.blogservice.controller;
 
 import com.sakinramazan.microservices.blogservice.entity.Blog;
+import com.sakinramazan.microservices.blogservice.entity.Post;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class BlogController {
@@ -40,13 +40,22 @@ public class BlogController {
     }
 
     @DeleteMapping("/blogs/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteBlog(@PathVariable(value = "id") Integer id) {
-        Blog Blog = blogService.getBlog(id);
-        blogService.deleteBlog(Blog.getId());
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
+    public ResponseEntity<Object> deleteBlog(@PathVariable(value = "id") Integer id) {
+        Blog blog = blogService.getBlog(id);
+        blogService.deleteBlog(blog.getId());
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(new HashMap<>().put("deleted", Boolean.TRUE), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<List<Post>> getBlogs(@PathVariable(value = "id") Integer id) {
+        return new ResponseEntity<>(blogService.getAllPostOf(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/blogs")
+    public ResponseEntity<Post> addNewPost(@PathVariable(value = "id") Integer id, @Valid @RequestBody Post post, Errors errors) {
+        return new ResponseEntity<>(blogService.addNewPost(post, id), HttpStatus.CREATED);
+    }
+
+
 }
