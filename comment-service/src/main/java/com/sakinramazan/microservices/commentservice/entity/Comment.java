@@ -25,8 +25,12 @@ public class Comment implements Serializable {
     @Size(max = 50)
     private String writer;
 
+    @NotNull
+    @Size(max = 150)
+    private String detail;
+
     @ManyToOne
-    @JoinColumn(name = "blog_id", referencedColumnName = "id")
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
 
 }
