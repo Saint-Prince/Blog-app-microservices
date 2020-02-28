@@ -43,7 +43,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog updateBlog(Blog blog) {
         Blog currBlog = getBlog(blog.getId());
-        currBlog.setBlog_subject(blog.getBlog_subject());
+        currBlog.setSubject(blog.getSubject());
         currBlog.setPosts(blog.getPosts());
         return blogRepository.save(currBlog);
     }

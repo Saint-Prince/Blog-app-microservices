@@ -14,8 +14,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
-@Entity(name = "post")
-public class Post implements Serializable {
+@Entity(name = "comment")
+public class Comment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,6 @@ public class Post implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "blog_id", referencedColumnName = "id")
-    private Blog blog;
+    private Post post;
 
 }

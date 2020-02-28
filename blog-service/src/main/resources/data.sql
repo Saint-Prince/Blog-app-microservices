@@ -12,6 +12,7 @@ CREATE TABLE blog(
 CREATE TABLE post(
     id INT AUTO_INCREMENT PRIMARY KEY,
     writer varchar(50) NOT NULL,
+    detail varchar(150) NOT NULL,
     blog_id INT,
     FOREIGN KEY (blog_id) REFERENCES blog(id)
 );
@@ -32,13 +33,13 @@ INSERT INTO blog(subject) VALUES    ('Sample Blog 1'),
                                     ('Sample Blog 3');
 
 
-INSERT INTO post(writer, blog_id) VALUES    ('Sample writer-1', 1),
-                                            ('Sample writer-2', 1),
-                                            ('Sample writer-3', 1),
-                                            ('Sample writer-1', 2),
-                                            ('Sample writer-5', 3);
+INSERT INTO post(writer, detail, blog_id) VALUES    ('Sample writer-1','Sample post detail-1', 1),
+                                                    ('Sample writer-2','Sample post detail-2', 1),
+                                                    ('Sample writer-3','Sample post detail-3', 1),
+                                                    ('Sample writer-1','Sample post detail-4', 2),
+                                                    ('Sample writer-5','Sample post detail-5', 3);
 
-INSERT INTO comment(writer, detail, post_id)    ('Sample writer-1', 'Sample comment detail-1', 1),
+INSERT INTO comment(writer, detail, post_id)  VALUES    ('Sample writer-1', 'Sample comment detail-1', 1),
                                                 ('Sample writer-2', 'Sample comment detail-2', 1),
                                                 ('Sample writer-1', 'Sample comment detail-3', 3),
                                                 ('Sample writer-2', 'Sample comment detail-4', 3),
