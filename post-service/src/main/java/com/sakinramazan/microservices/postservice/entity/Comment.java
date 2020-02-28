@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
-@Entity(name = "blog")
+@Entity(name = "comment")
 public class Comment implements Serializable {
 
     @Id
