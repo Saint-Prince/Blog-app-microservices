@@ -16,9 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Order(1)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-    @Value("${ui.serverUrl}")
-    private String uiServer;
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable();
