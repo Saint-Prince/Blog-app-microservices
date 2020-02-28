@@ -13,32 +13,33 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@RequestMapping("/comments")
 public class CommentController {
 
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/comments")
+    @GetMapping("/")
     public ResponseEntity<List<Comment>> getAllComments() {
         return new ResponseEntity<>(commentService.getAllComments(), HttpStatus.OK);
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Comment> getCommentById(@PathVariable(value = "id") Integer id) {
         return ResponseEntity.ok().body(commentService.getComment(id));
     }
 
-    @PostMapping("/comments")
+    @PostMapping("/")
     public ResponseEntity<Comment> createComment(@Valid @RequestBody Comment comment, Errors errors) {
         return new ResponseEntity<>(commentService.createComment(comment), HttpStatus.CREATED);
     }
 
-    @PutMapping("/comments")
+    @PutMapping("/")
     public ResponseEntity<Comment> updateComment(@Valid @RequestBody Comment comment, Errors errors) {
         return new ResponseEntity<>(commentService.updateComment(comment), HttpStatus.OK);
     }
 
-    @DeleteMapping("/comments/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteComment(@PathVariable(value = "id") Integer id) {
         Comment Comment = commentService.getComment(id);
         commentService.deleteComment(Comment.getId());
