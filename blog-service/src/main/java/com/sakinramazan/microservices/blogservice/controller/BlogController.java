@@ -14,48 +14,47 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@RequestMapping("/blogs")
 public class BlogController {
 
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/blogs")
+    @GetMapping("/")
     public ResponseEntity<List<Blog>> getAllBlogs() {
         return new ResponseEntity<>(blogService.getAllBlogs(), HttpStatus.OK);
     }
 
-    @GetMapping("/blogs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Blog> getBlogById(@PathVariable(value = "id") Integer id) {
         return ResponseEntity.ok().body(blogService.getBlog(id));
     }
 
-    @PostMapping("/blogs")
+    @PostMapping("/")
     public ResponseEntity<Blog> createBlog(@Valid @RequestBody Blog blog, Errors errors) {
         return new ResponseEntity<>(blogService.createBlog(blog), HttpStatus.CREATED);
     }
 
-    @PutMapping("/blogs")
+    @PutMapping("/")
     public ResponseEntity<Blog> updateBlog(@Valid @RequestBody Blog blog, Errors errors) {
         return new ResponseEntity<>(blogService.updateBlog(blog), HttpStatus.OK);
     }
 
-    @DeleteMapping("/blogs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBlog(@PathVariable(value = "id") Integer id) {
         Blog blog = blogService.getBlog(id);
         blogService.deleteBlog(blog.getId());
-
         return new ResponseEntity<>(new HashMap<>().put("deleted", Boolean.TRUE), HttpStatus.OK);
     }
 
-    @GetMapping("/posts/{id}")
-    public ResponseEntity<List<Post>> getBlogs(@PathVariable(value = "id") Integer id) {
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> getAllPosts(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(blogService.getAllPostOf(id), HttpStatus.OK);
     }
 
-    @PostMapping("/blogs")
+    @PostMapping("/{id}/new-post")
     public ResponseEntity<Post> addNewPost(@PathVariable(value = "id") Integer id, @Valid @RequestBody Post post, Errors errors) {
         return new ResponseEntity<>(blogService.addNewPost(post, id), HttpStatus.CREATED);
     }
-
 
 }
