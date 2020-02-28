@@ -1,5 +1,6 @@
 package com.sakinramazan.microservices.blogservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public class Blog implements Serializable {
 
     private String subject;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)
     private List<Post> posts;
 

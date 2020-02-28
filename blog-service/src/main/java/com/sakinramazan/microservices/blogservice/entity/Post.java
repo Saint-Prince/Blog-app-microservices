@@ -1,5 +1,6 @@
 package com.sakinramazan.microservices.blogservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,5 +34,9 @@ public class Post implements Serializable {
     @ManyToOne
     @JoinColumn(name = "blog_id", referencedColumnName = "id")
     private Blog blog;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
 }
