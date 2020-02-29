@@ -1,18 +1,22 @@
 package com.sakinramazan.microservices.blogservice.service.impl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sakinramazan.microservices.blogservice.client.PostServiceClient;
 import com.sakinramazan.microservices.blogservice.dao.BlogRepository;
 import com.sakinramazan.microservices.blogservice.entity.Blog;
 import com.sakinramazan.microservices.blogservice.entity.Post;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 // TODO -- remove Service annotation ?
+@EnableHystrix
 @Service
 public class BlogServiceImpl implements BlogService {
 
@@ -25,6 +29,13 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> getAllBlogs() {
         return blogRepository.findAll();
+    }
+
+    // Hystrix fallback function
+    public List<Blog> getStaticBlogs() {
+        List<Blog> staticTestBlogs = new ArrayList<>();
+        staticTestBlogs.add(new Blog());
+        return staticTestBlogs;
     }
 
     @Override
@@ -73,5 +84,18 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.save(blog);
 
         return currPost;
+    }
+
+    @HystrixCommand(fallbackMethod = "getStaticPosts")
+    @Override
+    public List<Post> getAllPosts() {
+        return postServiceClient.getAllPosts();
+    }
+
+    // Hystrix fallback function
+    public List<Post> getStaticPosts() {
+        List<Post> staticTestPosts = new ArrayList<>();
+        staticTestPosts.add(new Post());
+        return staticTestPosts;
     }
 }

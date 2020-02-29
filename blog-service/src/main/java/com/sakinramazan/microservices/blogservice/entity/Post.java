@@ -1,10 +1,7 @@
 package com.sakinramazan.microservices.blogservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
+@Builder
 @Entity(name = "post")
 public class Post implements Serializable {
 
@@ -25,11 +23,11 @@ public class Post implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    private String writer;
+    @Builder.Default private String writer = "Static sample test Writer via Builder";
 
     @NotNull
     @Size(max = 150)
-    private String detail;
+    @Builder.Default private String detail = "Static sample test Detail via Builder";
 
     @ManyToOne
     @JoinColumn(name = "blog_id", referencedColumnName = "id")

@@ -4,6 +4,7 @@ import com.sakinramazan.microservices.blogservice.entity.Blog;
 import com.sakinramazan.microservices.blogservice.entity.Post;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
+@EnableCircuitBreaker
 @RestController
 @RequestMapping("/blogs")
 public class BlogController {
@@ -55,6 +57,11 @@ public class BlogController {
     @PostMapping("/{id}/new-post")
     public ResponseEntity<Post> addNewPost(@PathVariable(value = "id") Integer id, @Valid @RequestBody Post post, Errors errors) {
         return new ResponseEntity<>(blogService.addNewPost(post, id), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all-posts")
+    public ResponseEntity<List<Post>> getAllPosts() {
+        return new ResponseEntity<>(blogService.getAllPosts(), HttpStatus.OK);
     }
 
 }

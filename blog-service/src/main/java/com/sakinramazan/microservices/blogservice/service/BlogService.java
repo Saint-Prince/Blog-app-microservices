@@ -22,4 +22,5 @@ public interface BlogService {
 
     Post addNewPost(Post post, Integer id);
 
+    List<Post> getAllPosts();
 }
