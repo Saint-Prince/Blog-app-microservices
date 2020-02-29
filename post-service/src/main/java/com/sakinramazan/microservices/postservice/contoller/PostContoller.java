@@ -31,12 +31,12 @@ public class PostContoller {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post, Errors errors) {
+    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
         return new ResponseEntity<>(postService.createPost(post), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Post> updatePost(@Valid @RequestBody Post post, Errors errors) {
+    public ResponseEntity<Post> updatePost(@Valid @RequestBody Post post) {
         return new ResponseEntity<>(postService.updatePost(post), HttpStatus.OK);
     }
 
