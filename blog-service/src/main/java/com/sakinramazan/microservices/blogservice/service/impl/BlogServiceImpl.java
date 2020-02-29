@@ -31,13 +31,6 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll();
     }
 
-    // Hystrix fallback function
-    public List<Blog> getStaticBlogs() {
-        List<Blog> staticTestBlogs = new ArrayList<>();
-        staticTestBlogs.add(new Blog());
-        return staticTestBlogs;
-    }
-
     @Override
     public Blog getBlog(Integer id) {
         Optional<Blog> blog = blogRepository.findById(id);
