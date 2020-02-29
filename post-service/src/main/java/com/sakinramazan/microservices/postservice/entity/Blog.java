@@ -1,7 +1,10 @@
 package com.sakinramazan.microservices.postservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,8 +13,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode
 @Entity(name = "blog")
 public class Blog implements Serializable {
@@ -22,7 +25,7 @@ public class Blog implements Serializable {
 
     @NotNull
     @Size(max = 150)
-    @Builder.Default private String subject = "Sample static Blog Subject";
+    private String subject;
 
     @JsonIgnore
     @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)

@@ -22,11 +22,11 @@ public class Post implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Builder.Default private String writer = "Static sample test Writer via Builder";
+    private String writer;
 
     @NotNull
     @Size(max = 150)
-    @Builder.Default private String detail = "Static sample test Detail via Builder";
+    private String detail;
 
     @ManyToOne
     @JoinColumn(name = "blog_id", referencedColumnName = "id")
