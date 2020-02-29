@@ -82,11 +82,15 @@ public class BlogServiceImpl implements BlogService {
     @HystrixCommand(fallbackMethod = "getStaticPosts")
     @Override
     public List<Post> getAllPosts() {
+        // Debug on console
+        System.out.println("Console out : post-service client called!");
         return postServiceClient.getAllPosts();
     }
 
     // Hystrix fallback function
     public List<Post> getStaticPosts() {
+        // Debug on console
+        System.out.println("Console out : Fallback function called!");
         List<Post> staticTestPosts = new ArrayList<>();
         staticTestPosts.add(new Post());
         return staticTestPosts;

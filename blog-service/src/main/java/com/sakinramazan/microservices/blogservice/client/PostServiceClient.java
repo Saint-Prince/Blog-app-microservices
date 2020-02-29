@@ -12,9 +12,9 @@ import java.util.List;
 @FeignClient("post-service")
 public interface PostServiceClient {
 
-    @GetMapping("/")
+    @GetMapping("/posts/")
     List<Post> getAllPosts();
 
-    @PostMapping("/")
+    @PostMapping("/posts/")
     Post savePost(@Valid @RequestBody Post post);
 }
