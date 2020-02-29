@@ -1,4 +1,4 @@
-package com.sakinramazanmicroservices.configserver;
+package com.sakinramazan.microservices.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
