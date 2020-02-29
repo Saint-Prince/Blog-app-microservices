@@ -52,7 +52,7 @@ public class PostContoller {
 
     @GetMapping("/send-kafka")
     public ResponseEntity<Object> senMessageonKafka() {
-        kafkaProducer.sendMessage("Sample Topic", "Sample Test Message");
+        kafkaProducer.sendMessage("sampletopic.t", "Sample Test Message");
         return new ResponseEntity<>(new HashMap<>().put("message-sent-status", Boolean.TRUE), HttpStatus.OK);
     }
 
