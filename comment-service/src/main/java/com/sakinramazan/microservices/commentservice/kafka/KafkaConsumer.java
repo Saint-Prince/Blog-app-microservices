@@ -12,7 +12,7 @@ public class KafkaConsumer {
 
     private CountDownLatch latch = new CountDownLatch(1);
 
-    @KafkaListener(topics = "Sample Topic")
+    @KafkaListener(topics = "sampletopic.t")
     public void receiveMessage(String message) {
         LOGGER.info("received message='{}'", message);
         latch.countDown();
