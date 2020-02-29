@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class Blog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Builder.Default private String subject = "Sample static Blog Subject";
+    @NotNull
+    @Size(max = 150)
+    private String subject;
 
     @JsonIgnore
     @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)
