@@ -50,9 +50,9 @@ public class PostContoller {
         return new ResponseEntity<>(new HashMap<>().put("deleted", Boolean.TRUE), HttpStatus.OK);
     }
 
-    @GetMapping("/send-kafka")
-    public ResponseEntity<Object> senMessageonKafka() {
-        kafkaProducer.sendMessage("sampletopic.t", "Sample Test Message");
+    @GetMapping("/send-kafka/{message}")
+    public ResponseEntity<Object> senMessageonKafka(@PathVariable(value = "message") String message) {
+        kafkaProducer.sendMessage("sampletopic.t", message);
         return new ResponseEntity<>(new HashMap<>().put("message-sent-status", Boolean.TRUE), HttpStatus.OK);
     }
 
