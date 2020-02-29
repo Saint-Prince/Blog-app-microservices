@@ -1,9 +1,7 @@
 package com.sakinramazan.microservices.postservice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,12 +22,17 @@ public class Post implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    private String writer;
+    @Builder.Default private String writer = "Static sample test Writer via Builder";
+
+    @NotNull
+    @Size(max = 150)
+    @Builder.Default private String detail = "Static sample test Detail via Builder";
 
     @ManyToOne
     @JoinColumn(name = "blog_id", referencedColumnName = "id")
     private Blog blog;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> comments;
 

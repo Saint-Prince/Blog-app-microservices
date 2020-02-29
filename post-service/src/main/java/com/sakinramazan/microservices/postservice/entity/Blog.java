@@ -1,9 +1,7 @@
 package com.sakinramazan.microservices.postservice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,8 +22,9 @@ public class Blog implements Serializable {
 
     @NotNull
     @Size(max = 150)
-    private String blog_subject;
+    @Builder.Default private String subject = "Sample static Blog Subject";
 
+    @JsonIgnore
     @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)
     private List<Post> posts;
 
