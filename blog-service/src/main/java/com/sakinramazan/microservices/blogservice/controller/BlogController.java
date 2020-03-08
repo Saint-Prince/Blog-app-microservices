@@ -22,7 +22,7 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Blog>> getAllBlogs() {
         return new ResponseEntity<>(blogService.getAllBlogs(), HttpStatus.OK);
     }
@@ -32,12 +32,12 @@ public class BlogController {
         return ResponseEntity.ok().body(blogService.getBlog(id));
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<Blog> createBlog(@Valid @RequestBody Blog blog, Errors errors) {
         return new ResponseEntity<>(blogService.createBlog(blog), HttpStatus.CREATED);
     }
 
-    @PutMapping("/")
+    @PutMapping()
     public ResponseEntity<Blog> updateBlog(@Valid @RequestBody Blog blog, Errors errors) {
         return new ResponseEntity<>(blogService.updateBlog(blog), HttpStatus.OK);
     }
