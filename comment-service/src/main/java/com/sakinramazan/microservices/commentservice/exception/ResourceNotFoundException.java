@@ -1,4 +1,4 @@
-package com.sakinrastatumazan.microservices.commentservice.exception;
+package com.sakinramazan.microservices.commentservice.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
