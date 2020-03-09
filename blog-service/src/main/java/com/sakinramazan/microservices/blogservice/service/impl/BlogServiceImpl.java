@@ -5,6 +5,7 @@ import com.sakinramazan.microservices.blogservice.client.PostServiceClient;
 import com.sakinramazan.microservices.blogservice.dao.BlogRepository;
 import com.sakinramazan.microservices.blogservice.entity.Blog;
 import com.sakinramazan.microservices.blogservice.entity.Post;
+import com.sakinramazan.microservices.blogservice.exception.ResourceNotFoundException;
 import com.sakinramazan.microservices.blogservice.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
@@ -35,7 +36,7 @@ public class BlogServiceImpl implements BlogService {
     public Blog getBlog(Integer id) {
         Optional<Blog> blog = blogRepository.findById(id);
         if (!blog.isPresent())
-            throw new RuntimeException("Blog not found!");
+            throw new ResourceNotFoundException("Blog not found!");
         return blog.get();
     }
 
