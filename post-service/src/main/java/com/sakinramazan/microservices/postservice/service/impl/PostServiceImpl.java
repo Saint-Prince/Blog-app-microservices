@@ -2,6 +2,7 @@ package com.sakinramazan.microservices.postservice.service.impl;
 
 import com.sakinramazan.microservices.postservice.dao.PostRepository;
 import com.sakinramazan.microservices.postservice.entity.Post;
+import com.sakinramazan.microservices.postservice.exception.ResourceNotFoundException;
 import com.sakinramazan.microservices.postservice.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class PostServiceImpl implements PostService {
     public Post getPost(Integer id) {
         Optional<Post> post = postRepository.findById(id);
         if (!post.isPresent())
-            throw new RuntimeException("Post not found!");
+            throw new ResourceNotFoundException("Post not found!");
         return post.get();
     }
 
