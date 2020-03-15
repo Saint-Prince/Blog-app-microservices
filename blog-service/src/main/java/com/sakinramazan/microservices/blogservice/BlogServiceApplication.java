@@ -13,7 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDiscoveryClient
 @EnableZuulProxy
 @SpringBootApplication
-@EnableSwagger2
 public class BlogServiceApplication {
 
     public static void main(String[] args) {
