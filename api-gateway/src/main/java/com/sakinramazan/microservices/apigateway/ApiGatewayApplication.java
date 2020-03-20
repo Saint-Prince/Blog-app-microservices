@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableZuulProxy
 @SpringBootApplication
-@EnableSwagger2
+//@EnableSwagger2
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
